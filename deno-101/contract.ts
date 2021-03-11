@@ -9,7 +9,7 @@ const answers = await ask.prompt([
     message: "Customer Name:",
     },
     {
-    name: "freelancer",
+    name: "freelancer: string",
     type: "input",
     message: "Freelancer Name:",
     },
