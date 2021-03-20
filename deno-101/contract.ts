@@ -1,44 +1,37 @@
-import Ask from "https://deno.land/x/ask@1.0.6/mod.ts";
+import { Ask } from "./mod.ts"
 
 const ask = new Ask()
-
 const answers = await ask.prompt([
-    {
+  {
     name: "customer",
     type: "input",
-    message: "Customer Name:",
-    },
-    {
-    name: "freelancer: string",
+    message: "Who is the customer?",
+  },
+  {
+    name: "freelancer",
     type: "input",
-    message: "Freelancer Name:",
-    },
-    {
+    message: "Who is the freelancer?",
+  },
+  {
     name: "date",
     type: "input",
-    message: "Date:",
-    },
-    {
+    message: "Date active?",
+  },
+  {
     name: "services",
     type: "input",
-    message: "Services:",
-    },
+    message: "What are the services provided?",
+  },
 ])
+const { customer, date, freelancer, services } = answers
 
-const { customer, date, freelancer, services} = answers
-
-const contractTemplate = await Deno.readTextFile('./template.txt')
-
+const contractTemplate = await Deno.readTextFile("./template.txt")
 const contract = contractTemplate
-    //@ts-ignore
-    .replaceAll("[customer]", customer)
-    //@ts-ignore
-    .replaceAll("[freelancer]", freelancer)
-    //@ts-ignore
-    .replaceAll("[date]", date)
-    //@ts-ignore
-    .replaceAll("[services]", services)
+  .replaceAll("[customer]", customer)
+  .replaceAll("[date]", date)
+  .replaceAll("[freelancer]", freelancer)
+  .replaceAll("[services]", services)
 
 await Deno.writeTextFile(`${date}-contract.txt`, contract)
 
-console.log('contract complete')
+console.log("contract complete")
